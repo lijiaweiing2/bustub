@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "buffer/buffer_pool_manager.h"
+#include"mock_buffer_pool_manager.h"
 #include <cstdio>
 #include <random>
 #include <string>
@@ -20,7 +21,7 @@ namespace bustub {
 
 // NOLINTNEXTLINE
 // Check whether pages containing terminal characters can be recovered
-TEST(BufferPoolManagerTest, DISABLED_BinaryDataTest) {
+TEST(BufferPoolManagerTest, BinaryDataTest) {
   const std::string db_name = "test.db";
   const size_t buffer_pool_size = 10;
 
@@ -29,7 +30,7 @@ TEST(BufferPoolManagerTest, DISABLED_BinaryDataTest) {
   std::uniform_int_distribution<char> uniform_dist(0);
 
   auto *disk_manager = new DiskManager(db_name);
-  auto *bpm = new BufferPoolManager(buffer_pool_size, disk_manager);
+  auto *bpm = new MockBufferPoolManager(buffer_pool_size, disk_manager);
 
   page_id_t page_id_temp;
   auto *page0 = bpm->NewPage(&page_id_temp);
@@ -86,12 +87,12 @@ TEST(BufferPoolManagerTest, DISABLED_BinaryDataTest) {
 }
 
 // NOLINTNEXTLINE
-TEST(BufferPoolManagerTest, DISABLED_SampleTest) {
+TEST(BufferPoolManagerTest, SampleTest) {
   const std::string db_name = "test.db";
   const size_t buffer_pool_size = 10;
 
   auto *disk_manager = new DiskManager(db_name);
-  auto *bpm = new BufferPoolManager(buffer_pool_size, disk_manager);
+  auto *bpm = new MockBufferPoolManager(buffer_pool_size, disk_manager);
 
   page_id_t page_id_temp;
   auto *page0 = bpm->NewPage(&page_id_temp);
